@@ -17,15 +17,14 @@ void combinations_sums(const vector<uint32_t> &vec,
   for (uint32_t i = 0; i < nbr_combinations; ++i) {
     sum = 0;
     for (uint8_t j = 0; j < vec_size; ++j) {
-      if ((i & (1 << j)) >> j) {
+      if (i & (1 << j)) {
         sum += vec[j];
         if (sum > x)
           break;
       }
     }
-    if (sum > x)
-      continue;
-    vec_results.push_back(sum);
+    if (sum <= x)
+      vec_results.push_back(sum);
   }
 }
 
@@ -55,9 +54,19 @@ int main(int argc, char const *argv[]) {
   combinations_sums(t1, t1_sums, x);
   combinations_sums(t2, t2_sums, x);
 
-  sort(t2_sums.begin(), t2_sums.end());
+  vector<uint32_t> *small, *big;
 
-  // for (const auto &el : t2_sums) {
+  if (t1_sums.size() < t2_sums.size()) {
+    small = &t1_sums;
+    big = &t2_sums;
+  } else {
+    big = &t1_sums;
+    small = &t2_sums;
+  }
+
+  sort(small->begin(), small->end());
+
+  // for (const auto &el : *small) {
   //   printf("%d ", el);
   // }
   // printf("\n");
@@ -65,8 +74,8 @@ int main(int argc, char const *argv[]) {
   uint64_t equal_combinations = 0;
   uint32_t both_sum;
 
-  for (const auto &sum_t1 : t1_sums) {
-    for (const auto &sum_t2 : t2_sums) {
+  for (const auto &sum_t1 : *big) {
+    for (const auto &sum_t2 : *small) {
       both_sum = sum_t1 + sum_t2;
       if (both_sum == x)
         ++equal_combinations;
