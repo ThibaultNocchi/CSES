@@ -38,15 +38,13 @@ int main(int argc, char const *argv[]) {
 
   uint8_t n;
   uint64_t x;
-  uint64_t ti;
-
-  vector<uint64_t> t;
 
   scanf("%hhd %ld", &n, &x);
 
+  vector<uint64_t> t(n);
+
   for (uint8_t i = 0; i < n; ++i) {
-    scanf("%ld", &ti);
-    t.push_back(ti);
+    scanf("%ld", &(t[i]));
   }
 
   random_shuffle(t.begin(), t.end());
