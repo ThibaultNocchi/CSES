@@ -1,3 +1,5 @@
+// https://www.codechef.com/problems/NUMGAME/
+
 #include <iostream>
 
 using std::cin;

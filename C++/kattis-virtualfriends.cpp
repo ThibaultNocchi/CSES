@@ -1,3 +1,5 @@
+// https://open.kattis.com/problems/virtualfriends
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -15,11 +17,6 @@ class union_find {
   int count;
 
 public:
-  // union_find(int N) : id(N, 0), sz(N, 1) {
-  //   count = N;
-  //   for (int i = 0; i < N; ++i)
-  //     id[i] = i;
-  // }
   union_find() { count = 0; }
 
   void add_person(string name) {
