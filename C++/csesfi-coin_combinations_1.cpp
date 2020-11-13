@@ -7,13 +7,14 @@
 
 using namespace std;
 
-void combinations(const int &sum, const vector<int> &coins,
-                  vector<int> &results);
+void combinations(const int &sum);
+
+vector<int> coins;
+vector<int> results;
 
 int main(int argc, char const *argv[]) {
 
   int sum, coins_number;
-  vector<int> coins;
 
   cin >> coins_number >> sum;
 
@@ -22,20 +23,18 @@ int main(int argc, char const *argv[]) {
     cin >> coins[i];
   }
 
-  vector<int> results;
   results.resize(sum + 1);
   fill(results.begin(), results.end(), -1);
 
   sort(coins.begin(), coins.end(), greater<int>());
 
-  combinations(sum, coins, results);
+  combinations(sum);
   cout << results[sum] << endl;
 
   return 0;
 }
 
-void combinations(const int &sum, const vector<int> &coins,
-                  vector<int> &results) {
+void combinations(const int &sum) {
   if (results[sum] != -1)
     return;
 
@@ -50,7 +49,7 @@ void combinations(const int &sum, const vector<int> &coins,
       continue;
     }
 
-    combinations(sum - coin, coins, results);
+    combinations(sum - coin);
     results[sum] += results[sum - coin];
   }
 }
