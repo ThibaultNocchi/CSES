@@ -11,7 +11,7 @@ all: $(OUT_CPP)
 #Then the command to create the .out file, probably you want to add further options to the g++ call.
 $(BINDIR)/%.out: %.cpp
 	@mkdir -p $(BINDIR)
-	g++ $< -o $@
+	g++ -g $< -o $@
 
 clear:
 	rm -r $(BINDIR)

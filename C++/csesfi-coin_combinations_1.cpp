@@ -8,7 +8,7 @@
 using namespace std;
 
 void combinations(const int &sum, const vector<int> &coins,
-                  vector<vector<string>> &results, vector<bool> &calculated);
+                  vector<int> &results);
 
 int main(int argc, char const *argv[]) {
 
@@ -22,40 +22,35 @@ int main(int argc, char const *argv[]) {
     cin >> coins[i];
   }
 
-  vector<vector<string>> results;
-  vector<bool> calculated;
+  vector<int> results;
   results.resize(sum + 1);
-  calculated.resize(sum + 1);
-  fill(calculated.begin(), calculated.end(), false);
+  fill(results.begin(), results.end(), -1);
 
   sort(coins.begin(), coins.end(), greater<int>());
 
-  combinations(sum, coins, results, calculated);
-
-  cout << results[sum].size() << endl;
+  combinations(sum, coins, results);
+  cout << results[sum] << endl;
 
   return 0;
 }
 
 void combinations(const int &sum, const vector<int> &coins,
-                  vector<vector<string>> &results, vector<bool> &calculated) {
-  if (calculated[sum])
+                  vector<int> &results) {
+  if (results[sum] != -1)
     return;
+
+  results[sum] = 0;
 
   for (const auto &coin : coins) {
     if (sum < coin)
       continue;
 
     if (sum == coin) {
-      results[sum].push_back(to_string(coin));
+      ++results[sum];
       continue;
     }
 
-    combinations(sum - coin, coins, results, calculated);
-    for (const auto &comb : results[sum - coin]) {
-      results[sum].push_back(comb + "," + to_string(coin));
-    }
+    combinations(sum - coin, coins, results);
+    results[sum] += results[sum - coin];
   }
-
-  calculated[sum] = true;
 }
