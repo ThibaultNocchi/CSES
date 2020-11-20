@@ -11,6 +11,7 @@ void combinations(const int &sum);
 
 vector<int> coins;
 vector<int> results;
+const int M = 1e9 + 7;
 
 int main(int argc, char const *argv[]) {
 
@@ -46,10 +47,12 @@ void combinations(const int &sum) {
 
     if (sum == coin) {
       ++results[sum];
+      results[sum] %= M;
       continue;
     }
 
     combinations(sum - coin);
     results[sum] += results[sum - coin];
+    results[sum] %= M;
   }
 }
