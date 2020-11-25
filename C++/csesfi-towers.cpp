@@ -21,11 +21,11 @@ int main(int argc, char const *argv[]) {
   vector<unsigned int> towers{k[0]};
   for (unsigned int i = 1; i < n; ++i) {
     auto it = lower_bound(towers.begin(), towers.end(), k[i], lower);
-    if (it == towers.end())
+    if (it == towers.end()) {
       towers.push_back(k[i]);
-    else
+      sort(towers.begin(), towers.end());
+    } else
       *it = k[i];
-    sort(towers.begin(), towers.end());
   }
 
   cout << towers.size() << endl;
