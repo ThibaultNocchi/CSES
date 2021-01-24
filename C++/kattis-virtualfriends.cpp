@@ -1,4 +1,5 @@
 // https://open.kattis.com/problems/virtualfriends
+// Union find
 
 #include <iostream>
 #include <string>

@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1754
+// Ad hoc
 
 #include <iostream>
 #include <sstream>

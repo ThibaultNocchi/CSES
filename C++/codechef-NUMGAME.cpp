@@ -1,4 +1,5 @@
 // https://www.codechef.com/problems/NUMGAME/
+// Find a pattern
 
 #include <iostream>
 

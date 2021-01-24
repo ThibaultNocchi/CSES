@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1628
+// Meet in the middle
 
 #include <algorithm>
 #include <bits/stdc++.h>

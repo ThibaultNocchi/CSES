@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1145/
+// Dynamic programming LIS
 
 #include <algorithm>
 #include <iostream>

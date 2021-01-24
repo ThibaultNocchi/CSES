@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1649/
+// Segment tree
 
 #include <algorithm>
 #include <iostream>
