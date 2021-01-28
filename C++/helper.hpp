@@ -14,6 +14,13 @@ template <typename T> void print_vector(const vector<T> &vec) {
     cout << el << endl;
 }
 
+vector<int> read_n_int(int n) {
+  vector<int> vec(n, 0);
+  for (int i = 0; i < n; ++i)
+    cin >> vec[i];
+  return vec;
+}
+
 class union_find {
   vector<int> id;
   vector<int> sz;
@@ -51,5 +58,32 @@ public:
     for (int i = 0; i < sz.size(); ++i) {
       cout << i << ": " << sz[i] << endl;
     }
+  }
+};
+
+class fenwick_tree {
+  vector<int> tree;
+
+public:
+  fenwick_tree(const vector<int> &array) : tree(array.size(), 0) {
+    for (unsigned int i = 0; i < tree.size(); ++i)
+      increase(i, array[i]);
+  }
+
+  void increase(int i, int delta) {
+    for (; i < (int)tree.size(); i |= i + 1)
+      tree[i] += delta;
+  }
+
+  int get_sum(int left, int right) { return sum(right) - sum(left - 1); }
+
+  int sum(int ind) {
+    int sum = 0;
+    while (ind >= 0) {
+      sum += tree[ind];
+      ind &= ind + 1;
+      --ind;
+    }
+    return sum;
   }
 };
