@@ -23,6 +23,16 @@ vector<int> read_n_int(int n) {
   return vec;
 }
 
+bool is_bit_set(int S, int j) { return S & (1 << j); }
+void set_bit(int &S, int j) { S |= (1 << j); }
+void unset_bit(int &S, int j) { S &= ~(1 << j); }
+void toggle_bit(int &S, int j) { S ^= 1 << j; }
+void set_n_bits(int &S, int n) { S = (1 << n) - 1; }
+bool is_power_2(int S) { return (S & (S - 1)) == 0; }
+int least_on_significant_bit(int S) { return S & (-S); }
+void turn_off_last_set_bit(int &S) { S &= (S - 1); }
+void turn_on_last_unset_bit(int &S) { S |= (S + 1); }
+
 class union_find {
   vector<int> id;
   vector<int> sz;
