@@ -219,3 +219,40 @@ private:
     return INT32_MAX;
   }
 };
+
+class graph {
+public:
+  typedef vector<pair<int, float>> NEIGHBORS;
+
+private:
+  const int nb_vertices;
+  int nb_edges;
+  vector<NEIGHBORS> adj;
+  bool directed;
+
+public:
+  graph(int n = 1000, bool directed = false)
+      : nb_vertices(n), nb_edges(0), directed(directed) {
+    adj.assign(n, NEIGHBORS());
+  }
+  int vertices() { return nb_vertices; }
+  int edges() { return nb_edges; }
+  int degree(int i) { return adj[i].size(); }
+
+  void add_edge(int i, int j, float weight = 1) {
+    nb_edges++;
+    adj[i].push_back(make_pair(j, weight));
+    if (!directed)
+      adj[j].push_back(make_pair(i, weight));
+  }
+
+  const NEIGHBORS &neighbors(int i) { return adj[i]; }
+
+  bool connected(int i, int j) {
+    for (const auto &edge : adj[i]) {
+      if (edge.first == j)
+        return true;
+    }
+    return false;
+  }
+};
