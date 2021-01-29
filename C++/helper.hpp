@@ -235,9 +235,9 @@ public:
       : nb_vertices(n), nb_edges(0), directed(directed) {
     adj.assign(n, NEIGHBORS());
   }
-  int vertices() { return nb_vertices; }
-  int edges() { return nb_edges; }
-  int degree(int i) { return adj[i].size(); }
+  int vertices() const { return nb_vertices; }
+  int edges() const { return nb_edges; }
+  int degree(int i) const { return adj[i].size(); }
 
   void add_edge(int i, int j, float weight = 1) {
     nb_edges++;
@@ -246,13 +246,38 @@ public:
       adj[j].push_back(make_pair(i, weight));
   }
 
-  const NEIGHBORS &neighbors(int i) { return adj[i]; }
+  const NEIGHBORS &neighbors(int i) const { return adj[i]; }
 
-  bool connected(int i, int j) {
+  bool connected(int i, int j) const {
     for (const auto &edge : adj[i]) {
       if (edge.first == j)
         return true;
     }
     return false;
+  }
+};
+
+class dfs {
+  const int UNVISITED = -1;
+  vector<int> dfs_num;
+  int number;
+  vector<int> visited;
+
+public:
+  dfs(const graph &g, int s) : dfs_num(g.vertices(), UNVISITED) {
+    number = 1;
+    depth_first_search(g, s);
+  }
+
+  const vector<int> &vertices() { return visited; }
+
+private:
+  void depth_first_search(const graph &g, int s) {
+    dfs_num[s] = number++;
+    visited.push_back(s);
+    for (const auto &n : g.neighbors(s)) {
+      if (dfs_num[n.first] == UNVISITED)
+        depth_first_search(g, n.first);
+    }
   }
 };
